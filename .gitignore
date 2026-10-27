@@ -1,0 +1,9 @@
+# Visual Studio / .NET build outputs
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Ignore local Whisper model file (GitHub limits individual uploads to 100MB)
+ggml-small.bin

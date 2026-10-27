@@ -1,0 +1,81 @@
+﻿<Window x:Class="LiveTranslator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Live Translator" Height="390" Width="480"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        MouseLeftButtonDown="Window_MouseDown">
+
+    <!-- Outer Border: Draggable from anywhere on the background -->
+    <Border Background="#FF0F172A" CornerRadius="12" BorderBrush="#FF334155" BorderThickness="1">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Custom Title Bar (Minimize & Close buttons) -->
+            <Grid Grid.Row="0" Margin="0,0,0,12">
+                <TextBlock Text="Live Translator" Foreground="#FF94A3B8" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center" IsHitTestVisible="False"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Content="🗕" Width="24" Height="24" Margin="0,0,4,0"
+                            Background="Transparent" Foreground="#FF94A3B8" BorderBrush="{x:Null}" Cursor="Hand"
+                            Click="MinimizeButton_Click" FontSize="10"/>
+                    <Button Content="✕" Width="24" Height="24"
+                            Background="Transparent" Foreground="#FF94A3B8" BorderBrush="{x:Null}" Cursor="Hand"
+                            Click="ExitButton_Click" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Start & Exit Buttons with Padding & Modern Look -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Margin="0,0,0,16">
+                <Button x:Name="StartButton" Content="Start Translation" Width="150" Height="42" Margin="6" 
+                        Click="StartButton_Click" FontWeight="Bold" Foreground="White" Background="#FF3B82F6" BorderBrush="{x:Null}" Cursor="Hand" Padding="12,8">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#FF3B82F6" BlurRadius="8" ShadowDepth="2" Opacity="0.4"/>
+                    </Button.Effect>
+                </Button>
+                <Button x:Name="ExitButton" Content="Exit" Width="100" Height="42" Margin="6" 
+                        Click="ExitButton_Click" Foreground="White" Background="#FF334155" BorderBrush="{x:Null}" Cursor="Hand" Padding="12,8">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#FF000000" BlurRadius="6" ShadowDepth="1" Opacity="0.3"/>
+                    </Button.Effect>
+                </Button>
+            </StackPanel>
+
+            <!-- Status Output Box -->
+            <Border Grid.Row="2" Background="#FF1E293B" CornerRadius="8" BorderBrush="#FF334155" BorderThickness="1" Padding="4" Margin="0,0,0,12">
+                <TextBox x:Name="OutputBox" IsReadOnly="True" TextWrapping="Wrap" 
+                         Background="Transparent" BorderBrush="{x:Null}" SelectionBrush="{x:Null}"
+                         Padding="8" VerticalScrollBarVisibility="Auto"
+                         Foreground="#FFF1F5F9" FontSize="13"
+                         Text="Ready. Model preloaded. Click 'Start Translation' to begin."/>
+            </Border>
+
+            <!-- Customization Panel (Transparency & Subtitle Color) -->
+            <Border Grid.Row="3" Background="#FF1E293B" CornerRadius="8" BorderBrush="#FF334155" BorderThickness="1" Padding="12">
+                <StackPanel>
+                    <DockPanel Margin="0,0,0,8">
+                        <TextBlock Text="Subtitle Transparency" Foreground="#FF94A3B8" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="OpacityText" Text="70%" Foreground="#FFCBD5E1" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <Slider x:Name="TransparencySlider" Minimum="0.2" Maximum="1.0" Value="0.7" TickFrequency="0.05" 
+                            ValueChanged="TransparencySlider_ValueChanged" Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Subtitle Text Color" Foreground="#FF94A3B8" FontSize="12" Margin="0,0,0,6"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button x:Name="BtnWhite" Content="White" Width="60" Height="28" Margin="0,0,8,0" Background="#FFF8FAFC" Foreground="#FF0F172A" BorderBrush="{x:Null}" Click="ColorButton_Click" Tag="#FFF2F2F2" FontWeight="Bold"/>
+                        <Button x:Name="BtnGreen" Content="Green" Width="60" Height="28" Margin="0,0,8,0" Background="#FF22C55E" Foreground="White" BorderBrush="{x:Null}" Click="ColorButton_Click" Tag="#FF22C55E" Opacity="0.4"/>
+                        <Button x:Name="BtnYellow" Content="Yellow" Width="60" Height="28" Margin="0,0,8,0" Background="#FFEAB308" Foreground="White" BorderBrush="{x:Null}" Click="ColorButton_Click" Tag="#FFEAB308" Opacity="0.4"/>
+                        <Button x:Name="BtnRed" Content="Red" Width="60" Height="28" Background="#FFEF4444" Foreground="White" BorderBrush="{x:Null}" Click="ColorButton_Click" Tag="#FFEF4444" Opacity="0.4"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <TextBlock Text="Tip: Press ESC or click ✕ on overlay to close." Grid.Row="4" HorizontalAlignment="Center" Margin="0,12,0,0" Foreground="#FF64748B" FontSize="11"/>
+        </Grid>
+    </Border>
+</Window>
